@@ -8,7 +8,7 @@ window.DANKZ_CONFIG = {
   /* Paste your Google Apps Script web app URL between the quotes.
      It looks like: https://script.google.com/macros/s/AKfycb....../exec
      Until you do, the quiz still works but results are not recorded. */
-  ENDPOINT: "",
+  ENDPOINT: "https://script.google.com/macros/s/AKfycbz98I-7v9_H0ZqeoaQJgI7blXHSujYRRGF5uH1NRFlKCJhQ-0nmpF_VCVcj6KcfOYQp/exec",
  
   /* Must match the SHARED_KEY line in Code.gs. Change all of them
      together if you want something less guessable than "dankz". */
