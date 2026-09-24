@@ -1,0 +1,46 @@
+/* =====================================================================
+   Dankz policy check — settings
+   This is the only file you need to edit after setup.
+   ===================================================================== */
+ 
+window.DANKZ_CONFIG = {
+ 
+  /* Paste your Google Apps Script web app URL between the quotes.
+     It looks like: https://script.google.com/macros/s/AKfycb....../exec
+     Until you do, the quiz still works but results are not recorded. */
+  ENDPOINT: "",
+ 
+  /* Must match the SHARED_KEY line in Code.gs. Change all of them
+     together if you want something less guessable than "dankz". */
+  SHARED_KEY: "dankz",
+ 
+  /* The store dropdown staff pick from. Edit, add or remove freely. */
+  STORES: [
+    "Osborne Park",
+    "Willetton",
+    "Joondalup",
+    "Port Kennedy",
+    "Mandurah",
+    "Midland",
+    "Online",
+    "Head Office"
+  ],
+ 
+  /* Optional. List your staff and the dashboard turns into a completion
+     tracker: it will show who has not sat the quiz at all, which is the
+     list you actually want when you are chasing people up.
+ 
+     Leave the array empty and the dashboard just reports on whoever
+     turns up. Names are matched loosely, so "Sam Carter" will match a
+     staff member who typed "sam carter".
+ 
+     Example:
+       STAFF: [
+         { name: "Sam Carter",  store: "Willetton" },
+         { name: "Ana Petrov",  store: "Midland" }
+       ]
+  */
+  STAFF: []
+ 
+};
+ 
