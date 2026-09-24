@@ -1,0 +1,1153 @@
+<title>Dankz Policy Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;1,400&display=swap">
+
+<style>
+:root{
+  --paper:#EBEEE8;
+  --surface:#FFFFFF;
+  --surface-2:#F5F7F2;
+  --ink:#151B18;
+  --ink-2:#4C5650;
+  --ink-3:#78827B;
+  --line:#D6DBD0;
+  --line-2:#C2C9BA;
+  --accent:#8A5A16;
+  --accent-soft:#F2E7D3;
+  --on-solid:#FFFFFF;
+  --good:#2C6E49;
+  --good-soft:#E2EEE6;
+  --good-line:#A9CFB8;
+  --bad:#A63A28;
+  --bad-soft:#F7E4DF;
+  --bad-line:#E0B2A7;
+  --shadow:0 1px 2px rgba(21,27,24,.05), 0 8px 24px -12px rgba(21,27,24,.14);
+  --radius:10px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#11150F;
+    --surface:#1A201B;
+    --surface-2:#212821;
+    --ink:#E8ECE4;
+    --ink-2:#A9B2A6;
+    --ink-3:#7E877C;
+    --line:#2E362E;
+    --line-2:#3D473C;
+    --accent:#D9A65A;
+    --accent-soft:#332815;
+    --on-solid:#11150F;
+    --good:#79C79A;
+    --good-soft:#1A2C21;
+    --good-line:#2F5340;
+    --bad:#E39178;
+    --bad-soft:#33201A;
+    --bad-line:#5A3529;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#11150F;
+  --surface:#1A201B;
+  --surface-2:#212821;
+  --ink:#E8ECE4;
+  --ink-2:#A9B2A6;
+  --ink-3:#7E877C;
+  --line:#2E362E;
+  --line-2:#3D473C;
+  --accent:#D9A65A;
+  --accent-soft:#332815;
+  --on-solid:#11150F;
+  --good:#79C79A;
+  --good-soft:#1A2C21;
+  --good-line:#2F5340;
+  --bad:#E39178;
+  --bad-soft:#33201A;
+  --bad-line:#5A3529;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:Archivo,"IBM Plex Sans",sans-serif;font-weight:700;text-wrap:balance;margin:0;letter-spacing:-.01em}
+p{margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+.wrap{max-width:680px;margin:0 auto;padding:0 20px 80px}
+
+/* ---------- masthead ---------- */
+.masthead{
+  border-bottom:1px solid var(--line);
+  background:var(--surface);
+}
+.masthead-inner{
+  max-width:680px;margin:0 auto;padding:14px 20px;
+  display:flex;align-items:baseline;gap:12px;
+}
+.wordmark{
+  font-family:Archivo,sans-serif;font-weight:700;font-size:15px;
+  letter-spacing:.16em;text-transform:uppercase;
+}
+.masthead-sub{
+  font-size:12.5px;color:var(--ink-3);letter-spacing:.04em;
+}
+
+/* ---------- progress rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:5;
+  background:var(--surface);
+  border-bottom:1px solid var(--line);
+}
+.rail-inner{max-width:680px;margin:0 auto;padding:10px 20px}
+.rail-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:8px}
+.eyebrow{
+  font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--accent);font-weight:600;
+}
+.counter{font-size:12.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--accent);width:0;transition:width .35s cubic-bezier(.4,0,.2,1)}
+
+/* ---------- start screen ---------- */
+.start{padding-top:40px;display:flex;flex-direction:column;gap:26px}
+.start h1{font-size:clamp(28px,5.5vw,38px);line-height:1.12}
+.lede{color:var(--ink-2);font-size:17px;max-width:56ch}
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+}
+.fact{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.fact dt{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.fact dd{margin:0;font-family:Archivo,sans-serif;font-weight:600;font-size:17px}
+
+.form{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow);
+}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:12.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+.field input,.field select{
+  font:inherit;font-size:16px;color:var(--ink);
+  background:var(--surface-2);border:1px solid var(--line-2);border-radius:7px;
+  padding:11px 12px;width:100%;
+}
+.field input:focus,.field select:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+
+.btn{
+  border:1px solid transparent;border-radius:7px;
+  padding:12px 20px;font-weight:600;font-size:15px;cursor:pointer;
+  background:var(--accent);color:var(--on-solid);transition:filter .15s ease;
+}
+.btn:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.45;cursor:not-allowed;filter:none}
+.btn-quiet{
+  background:transparent;color:var(--ink-2);border-color:var(--line-2);
+}
+.btn-quiet:hover{background:var(--surface-2);filter:none}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+.note{font-size:13.5px;color:var(--ink-3);max-width:60ch}
+
+/* ---------- question ---------- */
+.q-screen{padding-top:30px;display:flex;flex-direction:column;gap:22px}
+.q-text{font-size:clamp(20px,3.6vw,24px);line-height:1.3;font-family:Archivo,sans-serif;font-weight:600}
+.q-scenario{
+  font-family:"IBM Plex Serif",Georgia,serif;font-size:16.5px;color:var(--ink-2);
+  border-left:2px solid var(--line-2);padding-left:14px;
+}
+.options{display:flex;flex-direction:column;gap:9px}
+.opt{
+  display:flex;gap:13px;align-items:flex-start;text-align:left;width:100%;
+  background:var(--surface);border:1px solid var(--line-2);border-radius:var(--radius);
+  padding:14px 16px;cursor:pointer;transition:border-color .15s ease,background .15s ease;
+}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--surface-2)}
+.opt:disabled{cursor:default}
+.opt-key{
+  flex:0 0 24px;height:24px;border-radius:5px;background:var(--surface-2);
+  border:1px solid var(--line-2);
+  display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--ink-3);
+  margin-top:1px;
+}
+.opt-text{flex:1;font-size:15.5px;line-height:1.45}
+.opt.is-right{border-color:var(--good-line);background:var(--good-soft)}
+.opt.is-right .opt-key{background:var(--good);border-color:var(--good);color:var(--on-solid)}
+.opt.is-wrong{border-color:var(--bad-line);background:var(--bad-soft)}
+.opt.is-wrong .opt-key{background:var(--bad);border-color:var(--bad);color:var(--on-solid)}
+.opt.is-dim{opacity:.55}
+
+/* ---------- feedback ---------- */
+.feedback{
+  border:1px solid var(--line);border-left-width:3px;border-radius:var(--radius);
+  background:var(--surface);padding:18px 20px;display:flex;flex-direction:column;gap:10px;
+  box-shadow:var(--shadow);
+}
+.feedback.right{border-left-color:var(--good)}
+.feedback.wrong{border-left-color:var(--bad)}
+.verdict{
+  font-family:Archivo,sans-serif;font-weight:700;font-size:13px;
+  letter-spacing:.1em;text-transform:uppercase;
+}
+.feedback.right .verdict{color:var(--good)}
+.feedback.wrong .verdict{color:var(--bad)}
+.why{font-family:"IBM Plex Serif",Georgia,serif;font-size:16px;line-height:1.6;color:var(--ink)}
+.source{
+  font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);
+  border-top:1px solid var(--line);padding-top:9px;
+}
+@media (prefers-reduced-motion: no-preference){
+  .feedback{animation:rise .28s cubic-bezier(.2,.7,.3,1)}
+  @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+}
+
+/* ---------- results ---------- */
+.result{padding-top:36px;display:flex;flex-direction:column;gap:24px}
+.scoreboard{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px;
+}
+.scoreboard.pass{border-color:var(--good-line);background:var(--good-soft)}
+.big{
+  font-family:Archivo,sans-serif;font-weight:700;font-size:clamp(40px,9vw,58px);
+  line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em;
+}
+.scoreboard.pass .big{color:var(--good)}
+.stamp{
+  display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+  font-family:Archivo,sans-serif;font-weight:700;font-size:12.5px;
+  letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid currentColor;border-radius:99px;padding:5px 12px;
+}
+.scoreboard.pass .stamp{color:var(--good)}
+.scoreboard.fail .stamp{color:var(--accent)}
+
+.missed{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.miss{background:var(--surface);padding:16px 18px;display:flex;flex-direction:column;gap:7px}
+.miss-sec{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.miss-q{font-weight:600;font-size:15.5px;line-height:1.4}
+.miss-a{font-size:15px;color:var(--ink-2)}
+.miss-a b{color:var(--good);font-weight:600}
+.miss-why{font-family:"IBM Plex Serif",Georgia,serif;font-size:15px;color:var(--ink-2);line-height:1.55}
+
+.sync{font-size:13px;color:var(--ink-3);display:flex;align-items:center;gap:8px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--ink-3);flex:none}
+.dot.ok{background:var(--good)}
+.dot.warn{background:var(--accent)}
+
+h2.sec{font-size:19px;margin-top:6px}
+</style>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <span class="wordmark">Dankz</span>
+    <span class="masthead-sub">Staff policy check</span>
+  </div>
+</div>
+
+<div class="rail" id="rail" hidden>
+  <div class="rail-inner">
+    <div class="rail-top">
+      <span class="eyebrow" id="railSection">Warranty periods</span>
+      <span class="counter" id="railCount">1 / 36</span>
+    </div>
+    <div class="bar"><span id="railBar"></span></div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+
+<main class="wrap">
+
+  <!-- START -->
+  <section class="start" id="screenStart">
+    <div>
+      <h1>What do you actually know about our terms?</h1>
+      <p class="lede" style="margin-top:12px">Thirty-six questions on warranties, claims, returns, layby, orders, delivery and consumer law, taken straight from the Dankz policies. You will get the answer and the reasoning after each one.</p>
+    </div>
+
+    <dl class="facts">
+      <div class="fact"><dt>Questions</dt><dd>36</dd></div>
+      <div class="fact"><dt>Time</dt><dd>20 minutes</dd></div>
+      <div class="fact"><dt>Pass mark</dt><dd>36 / 36</dd></div>
+      <div class="fact"><dt>Retakes</dt><dd>Unlimited</dd></div>
+    </dl>
+
+    <p class="note">You need every question right to pass, and you can sit it as many times as you like. The point is that you end up knowing the answers, not that anyone gets caught out.</p>
+
+    <form class="form" id="startForm">
+      <div class="field">
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" autocomplete="name" required placeholder="First and last name">
+      </div>
+      <div class="field">
+        <label for="store">Your store</label>
+        <select id="store" name="store" required>
+          <option value="">Choose your store</option>
+        </select>
+      </div>
+      <div class="btn-row">
+        <button class="btn" type="submit">Start the quiz</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- QUESTION -->
+  <section class="q-screen" id="screenQ" hidden>
+    <div>
+      <h2 class="q-text" id="qText"></h2>
+      <p class="q-scenario" id="qScenario" style="margin-top:12px" hidden></p>
+    </div>
+    <div class="options" id="qOptions"></div>
+    <div id="qFeedback"></div>
+    <div class="btn-row" id="qNav" hidden>
+      <button class="btn" id="btnNext" type="button">Next question</button>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section class="result" id="screenResult" hidden></section>
+
+</main>
+
+<script>
+/* =====================================================================
+   Settings come from config.js, which sits next to this file.
+   Edit that, not this. The defaults below only apply if config.js is
+   missing, so the quiz still runs rather than showing a blank page.
+   ===================================================================== */
+var CONFIG = window.DANKZ_CONFIG || {};
+if(!CONFIG.ENDPOINT) CONFIG.ENDPOINT = "";
+if(!CONFIG.SHARED_KEY) CONFIG.SHARED_KEY = "dankz";
+if(!CONFIG.STORES || !CONFIG.STORES.length){
+  CONFIG.STORES = ["Osborne Park","Willetton","Joondalup","Port Kennedy",
+                   "Mandurah","Midland","Online","Head Office"];
+}
+
+(function(){
+  var sel = document.getElementById("store");
+  CONFIG.STORES.forEach(function(name){
+    var o = document.createElement("option");
+    o.textContent = name;
+    sel.appendChild(o);
+  });
+})();
+
+/* =====================================================================
+   QUESTIONS
+   Each entry: id, section, q (the question), scenario (optional setup
+   line), options (array), answer (index of the correct option, 0-based),
+   why (the explanation shown after answering), source (policy name).
+   Edit freely — the quiz counts them automatically.
+   ===================================================================== */
+var QUESTIONS = [
+
+/* ---- A. Warranty periods ---- */
+{
+  id:"A1", section:"Warranty periods",
+  q:"When does a Dankz warranty period start?",
+  options:[
+    "The day the customer places the order",
+    "The day the customer pays in full",
+    "The day the customer receives the furniture",
+    "The day the item is dispatched from the warehouse"
+  ],
+  answer:2,
+  why:"The warranty period commences from the date the customer receives the furniture. Every cover period runs from the date of delivery, not the date of sale. On a custom order that takes fourteen weeks to arrive, that difference matters.",
+  source:"Warranties and Policies"
+},
+{
+  id:"A2", section:"Warranty periods",
+  q:"How long is the structural frame warranty on a Signature range lounge?",
+  options:["2 years","5 years","10 years","15 years"],
+  answer:3,
+  why:"The Signature range is our Australian made lounge range, and it is the only range that carries the extended warranty: 15 years on the structural frame from the date of delivery, described in the policy as the defined life of the lounge. It covers faults in the internal wooden structural frame caused by defects in materials or workmanship under normal household use. If it is not Signature, it is not 15 years.",
+  source:"Signature Range Warranty"
+},
+{
+  id:"A3", section:"Warranty periods",
+  q:"A customer is looking at a lounge that is not from the Signature range. What frame warranty applies?",
+  options:["2 years","5 years","10 years","15 years, the same as Signature"],
+  answer:0,
+  why:"The 15 year frame warranty belongs to the Signature range only. Every other lounge, and all living and dining furniture, carries a 2 year structural frame warranty from the date of delivery. Quoting 15 years on the wrong product is the easiest mistake to make on the floor and the hardest to walk back later, so check the range before you say a number.",
+  source:"Warranty Policy, living and dining"
+},
+{
+  id:"A4", section:"Warranty periods",
+  q:"On a Signature range lounge, how long is the foam covered against manufacturing defects?",
+  options:["2 years","5 years","10 years","15 years, it is part of the frame"],
+  answer:1,
+  why:"Foam in a Signature lounge is covered for 5 years from delivery against manufacturing defects. The tiers on a Signature lounge are worth memorising: frame 15 years, foam 5 years, everything else 2 years. Outside the Signature range, foam falls under the 2 year other components clause like everything else. Electrical components including motors, handsets, transformers and power supplies are covered for 2 years across the board, and that includes the mechanism in an electric recliner.",
+  source:"Signature Range Warranty and Warranty Policy"
+},
+{
+  id:"A5", section:"Warranty periods",
+  scenario:"A customer bought a Signature lounge four years ago, then sold it to her sister when she moved house. The sister is now in store with a cracked frame.",
+  q:"Is the frame covered?",
+  options:[
+    "Yes, the 15 year frame warranty still has 11 years to run",
+    "No, the warranty applies to the original purchaser only",
+    "Yes, as long as she has the original receipt",
+    "Yes, but she pays the transport costs"
+  ],
+  answer:1,
+  why:"Every Dankz warranty applies to furniture bought for domestic residential use and to the original purchaser only. That holds across the whole range, not just Signature, and it does not transfer when the furniture is sold or given away. Be straight about it, and be kind about it, because the person in front of you usually has no idea.",
+  source:"Warranty Policy"
+},
+
+/* ---- B. What the warranty does not cover ---- */
+{
+  id:"B1", section:"What is not covered",
+  scenario:"Six months after delivery a customer says the seat cushions have gone softer and there is a dip where they always sit.",
+  q:"How is this treated?",
+  options:[
+    "A foam warranty claim, the foam is covered for 5 years",
+    "Not covered, this is softening and comfort settlement",
+    "Covered once as a goodwill replacement",
+    "Covered only if reported in the first 3 months"
+  ],
+  answer:1,
+  why:"Foam, feather fillings and suspension softening and comfort settlement are specifically excluded. The foam warranty covers manufacturing defects, not furniture becoming softer and taking the shape of the people using it. Set this expectation at the point of sale and it stops being an argument later.",
+  source:"Warranty exclusions"
+},
+{
+  id:"B2", section:"What is not covered",
+  q:"A customer complains about small balls of fibre forming on their fabric lounge. What do you tell them?",
+  options:[
+    "It is covered under the 2 year upholstery warranty",
+    "It is pilling, which is not covered, and a fabric shaver will fix it",
+    "It is covered once within the first 12 months",
+    "It is a fault in the fabric and the cover will be replaced"
+  ],
+  answer:1,
+  why:"Fabric pilling is excluded from the warranty. The policy recommends a fabric shaver or de-pilling machine to deal with it. It is a normal characteristic of many fabrics rather than a fault, and it is worth mentioning during the sale on fabrics that are prone to it.",
+  source:"Warranty exclusions"
+},
+{
+  id:"B3", section:"What is not covered",
+  q:"What is the maximum recommended weight limit on Dankz furniture?",
+  options:["100kg per seat","125kg per seat","148kg per seat","It depends on the range"],
+  answer:1,
+  why:"One number across the whole range: 125kg per seat. Damage caused by exceeding it is not covered under warranty. Note it is per seat rather than per item, so a three seater is not rated to 125kg in total. This was previously written two different ways in two documents and is now a single limit, so ignore any older figure you may have been told.",
+  source:"Warranty exclusions"
+},
+{
+  id:"B4", section:"What is not covered",
+  scenario:"A customer says the leather lounge delivered on Tuesday has marks and wrinkles that the showroom model does not have.",
+  q:"What is the correct response?",
+  options:[
+    "Lodge a warranty claim for defective upholstery",
+    "These are natural leather characteristics and are not a fault",
+    "Offer a partial refund to settle it",
+    "Replace the item, display models must match exactly"
+  ],
+  answer:1,
+  why:"Natural leather characteristics including marks, scars, wrinkles, grain variation and stretching over time are excluded, and the policy states display models may differ slightly from the product delivered. Colour and texture also read differently in a home than under showroom lighting. All of this lands far better said before the sale than after the delivery.",
+  source:"Warranty exclusions and Product Variation"
+},
+
+/* ---- C. Making a claim ---- */
+{
+  id:"C1", section:"Making a claim",
+  q:"How does a customer lodge a warranty claim?",
+  options:[
+    "Phone the store they bought from",
+    "Bring the item back to the store",
+    "Email service@dankz.com.au",
+    "Fill in a claim form in store and we send it on"
+  ],
+  answer:2,
+  why:"Warranty and service requests are handled by email only, to service@dankz.com.au, so that everything is captured for the service team. Your job is to direct the customer to email, not to lodge it for them or take the details down yourself, because that is how claims get lost. They need to send proof of purchase, a clear description of the issue, and a photograph of the entire piece of furniture. The photo is mandatory, not optional, so tell them that at the counter and save everyone a week.",
+  source:"Making a Claim"
+},
+{
+  id:"C2", section:"Making a claim",
+  q:"How long should you tell a customer to allow for a response to their claim?",
+  options:["24 hours","48 hours","5 to 7 working days","14 days"],
+  answer:2,
+  why:"The policy asks customers to allow 5 to 7 working days for a response. Say it when they lodge the claim. A customer who is expecting a week does not ring the store on day two.",
+  source:"Making a Claim"
+},
+{
+  id:"C3", section:"Making a claim",
+  scenario:"A lounge delivered by Dankz in the metro area develops a fault at 14 months and has to come back for repair.",
+  q:"Who pays the transport?",
+  options:[
+    "Dankz, for the life of the warranty",
+    "The customer, unless the Australian Consumer Law requires otherwise",
+    "Split evenly between Dankz and the customer",
+    "Dankz, because the item is still under a 2 year warranty"
+  ],
+  answer:1,
+  why:"For goods Dankz delivered inside the standard delivery zone, Dankz covers transport costs for the first 12 months. After that the cost sits with the purchaser unless the Australian Consumer Law requires otherwise. Metro here means the same standard delivery zone used for delivery charges, so a Mandurah or Port Kennedy customer inside that zone is covered on the same terms as one in Osborne Park. Outside the zone Dankz does not contribute unless the law requires it, and if the customer collected the goods themselves, returning them is their responsibility.",
+  source:"Making a Claim"
+},
+
+/* ---- D. Returns, restocking and layby ---- */
+{
+  id:"D1", section:"Returns and layby",
+  scenario:"Four days after delivery a customer rings. The dining chairs are standard stock, still boxed, never used, and they have simply changed their mind.",
+  q:"What can you tell them?",
+  options:[
+    "Full refund, they are within the 7 day window",
+    "Nothing can be done, Dankz does not accept change of mind returns",
+    "A restocking request may be considered, but it needs written approval first and carries a 20 percent fee",
+    "Store credit only, with no fee"
+  ],
+  answer:2,
+  why:"Dankz does not offer automatic change of mind returns, but a restocking request may be considered case by case at the company's discretion. Approval is never guaranteed, it must be given in writing before anything comes back, and an approved return attracts a 20 percent restocking fee. Do not promise a refund across the counter.",
+  source:"Restocking Policy"
+},
+{
+  id:"D2", section:"Returns and layby",
+  q:"A restocking request has to be made within what time?",
+  options:[
+    "7 days of delivery or collection",
+    "14 days of delivery or collection",
+    "30 days of purchase",
+    "7 days of the order being placed"
+  ],
+  answer:0,
+  why:"The request must be made within 7 days of delivery or collection. The item also has to be standard stock, unused, in as new condition, complete with all components and suitable for resale as new. Anything assembled, installed or showing signs of use is out, and so are custom, special order, clearance, floor stock and discontinued items.",
+  source:"Restocking Policy"
+},
+{
+  id:"D3", section:"Returns and layby",
+  scenario:"A customer confirmed a lounge in a custom fabric yesterday and has changed their mind this morning.",
+  q:"Where do they stand?",
+  options:[
+    "They can cancel free of charge within 7 days",
+    "They can cancel with a 20 percent restocking fee",
+    "Special and custom orders cannot be cancelled, returned or restocked",
+    "They can cancel as long as the fabric has not been cut"
+  ],
+  answer:2,
+  why:"Special and custom orders cannot be cancelled, returned or restocked. Production or sourcing begins as soon as the order is confirmed, so there is no window afterwards. This is exactly why custom selections have to be checked carefully with the customer before you write the order, and why they should hear it clearly at that moment. A 30 percent deposit applies, as it does on every product. One thing this does not touch: if the finished product turns out to be faulty, the customer's rights under the Australian Consumer Law apply in full, the same as any other item.",
+  source:"Special and Custom Orders"
+},
+{
+  id:"D4", section:"Returns and layby",
+  scenario:"A layby on a $4,000 lounge is cancelled by the customer. They have paid $2,000 so far.",
+  q:"What are they refunded?",
+  options:[
+    "The full $2,000",
+    "$1,200, being their payments less a 20 percent termination fee",
+    "$800, being their payments less 30 percent",
+    "Nothing, layby payments are forfeited"
+  ],
+  answer:1,
+  why:"A termination fee of 20 percent of the total product price applies when a layby is cancelled, whether by the customer or through non payment. On a $4,000 lounge that is $800, leaving $1,200 of the $2,000 paid. Any delivery charges already paid are not refunded on top of that. Two other things to know: the minimum deposit is 30 percent, which applies to every product and not just layby, and furniture on layby cannot be delivered or collected until the balance is paid in full.",
+  source:"Layby Policy"
+},
+{
+  id:"D5", section:"Returns and layby",
+  scenario:"A customer who ordered a standard stock buffet on Monday rings on Wednesday wanting to switch to the darker finish. Stock has already been allocated and delivery is booked.",
+  q:"What do you tell them?",
+  options:[
+    "No problem, changes are free until the item is delivered",
+    "Changes cannot be made once processing has commenced or delivery has been scheduled",
+    "The change is automatic, we just reissue the invoice",
+    "They must cancel the order and place a new one at no cost"
+  ],
+  answer:1,
+  why:"Once an order is placed Dankz begins processing, allocating stock and scheduling delivery. Changes to product, configuration, colour, quantity, delivery details or address have to be requested as early as possible, are subject to approval, and may carry administration, handling or reprocessing fees. Orders cannot be changed once processing has commenced or delivery has been scheduled. Take the request, be honest that it is not guaranteed, and put it to a manager rather than promising it on the spot.",
+  source:"Order Changes and Cancellations"
+},
+{
+  id:"D6", section:"Returns and layby",
+  scenario:"A restocking request is approved on a $3,000 sofa that was delivered for the standard $140 charge.",
+  q:"What does the customer get, and in what form?",
+  options:[
+    "$3,140 refunded to their card",
+    "$2,400 in store credit, being the price less a 20 percent restocking fee, with the $140 delivery not refunded",
+    "$3,000 refunded to their card, with the delivery charge kept",
+    "$2,400 refunded to their card"
+  ],
+  answer:1,
+  why:"An approved change of mind return is settled as store credit, not money back. The restocking fee is 20 percent of the product price, so $600 on a $3,000 sofa, and delivery charges are never refunded. Any further costs Dankz incurs, such as return freight, handling or storage, also come off the credit. The credit is only issued once the item has been received, inspected and approved. This is different from a refund required under the Australian Consumer Law, which goes back to the original payment method with no fee deducted.",
+  source:"Restocking Policy"
+},
+
+/* ---- E. Delivery ---- */
+{
+  id:"E1", section:"Delivery",
+  q:"What does the standard $140 delivery charge cover?",
+  options:[
+    "Kerbside drop off anywhere in the metro area",
+    "Delivery within the standard zone, into the room of choice, fully assembled and positioned, with packaging removed",
+    "Any order under $5,000, delivered to the front door",
+    "Delivery and assembly, with packaging left for the customer"
+  ],
+  answer:1,
+  why:"The $140 standard charge is the base delivery charge inside the standard zone, which is 15km from a Dankz store or 15km from the Perth CBD. The Comfort of Home service takes the furniture to the room of choice on the ground floor, delivers it fully assembled, installs and positions it, and removes all packaging. A 3 piece lounge suite is the example the policy uses, not a limit. Additional bulky items are charged on top of the base charge.",
+  source:"Delivery Policy"
+},
+{
+  id:"E2", section:"Delivery",
+  scenario:"A customer buys a 3 piece lounge suite, a dining table and a buffet, all going to one metro address.",
+  q:"What is the delivery charge?",
+  options:["$140","$160","$180","$420, one charge per item"],
+  answer:2,
+    why:"Additional bulky items attract $20 each on top of the base charge. The lounge suite is covered by the $140, and the dining table and buffet are two additional bulky items, so $40 on top, giving $180. Sofas, recliners, dining tables, buffets, entertainment units and other large items all count as bulky.",
+  source:"Delivery Policy"
+},
+{
+  id:"E3", section:"Delivery",
+  q:"A delivery involves one flight of ordinary residential stairs. What applies?",
+  options:[
+    "Nothing extra, stairs are included",
+    "A flat $40 stair surcharge, and stairs are limited to two flights",
+    "$40 per flight of stairs",
+    "Ground floor delivery only"
+  ],
+  answer:1,
+  why:"Any delivery involving stairs carries a flat $40 surcharge. It is charged once per delivery, not per item and not per flight, and delivery is limited to a maximum of two flights of standard residential stairs. Standard means straight, regular width, with safe headroom and clear landings. The customer has to tell us about stairs in advance, not on the day.",
+  source:"Delivery Policy"
+},
+{
+  id:"E4", section:"Delivery",
+  scenario:"A customer in an apartment says the only way up is a narrow spiral staircase.",
+  q:"What do you tell them before they buy?",
+  options:[
+    "The $40 stair surcharge will apply",
+    "The team will quote extra on the day",
+    "Delivery will not be attempted, the furniture goes to the ground floor only",
+    "They will need to remove the staircase handrail"
+  ],
+  answer:2,
+  why:"Delivery is not attempted where access involves more than two flights, or spiral, ladder style, steep, very narrow or obstructed stairs. In those cases the furniture is delivered to the ground floor only. The customer is responsible for measuring access and disclosing it beforehand, and Dankz is not responsible for furniture that cannot be delivered because of access that was never mentioned.",
+  source:"Delivery Policy"
+},
+{
+  id:"E5", section:"Delivery",
+  scenario:"A customer rings three days after delivery about a scratch on the sideboard that was there when it arrived.",
+  q:"How do you handle it?",
+  options:[
+    "Treat it as a warranty claim for a manufacturing defect",
+    "The policy requires damage to be reported within 24 hours, so escalate it rather than refusing outright",
+    "Damage can be reported any time within 7 days",
+    "There is no time limit on reporting delivery damage"
+  ],
+  answer:1,
+  why:"Customers must inspect furniture on delivery and report any damage within 24 hours with photographs, and risk passes to the customer once the goods are delivered and accepted. That is the policy. But a time limit written into a store policy cannot remove a customer's rights under the Australian Consumer Law, so send it up the line rather than closing it down at the counter.",
+  source:"Delivery Policy and Australian Consumer Law"
+},
+{
+  id:"E6", section:"Delivery",
+  q:"Nobody is home when the truck arrives, and no authority to leave was given. What happens?",
+  options:[
+    "The delivery is rebooked at no charge",
+    "A $50 administration fee applies",
+    "A redelivery fee of $140 applies",
+    "The goods are left at the door"
+  ],
+  answer:2,
+  why:"A redelivery fee of $140 applies where delivery cannot be completed because of customer unavailability, undisclosed access issues or unsafe conditions. An adult over 18 has to be present to receive the delivery, so say that when you book it in rather than assuming the customer knows.",
+  source:"Delivery Policy"
+},
+{
+  id:"E7", section:"Delivery",
+  scenario:"A customer lives 25km beyond the edge of the standard delivery zone.",
+  q:"What does the delivery cost?",
+  options:[
+    "The standard $140, the zone is a guide only",
+    "$140 plus $4 per kilometre beyond the zone boundary",
+    "A flat $200 regional surcharge on top of the standard charge",
+    "Delivery is not available outside the standard zone"
+  ],
+  answer:1,
+  why:"The standard zone is 15km from a Dankz store or 15km from the Perth CBD, and that is the definition that governs, wherever else the policies talk about metro or the Perth and Mandurah area. Outside it, an extra $4 per kilometre applies, measured from the boundary of the zone rather than from the store or the customer's door. The maximum is 40km beyond the zone, and anything further has to be discussed with the team before you commit to it.",
+  source:"Delivery Policy"
+},
+{
+  id:"E8", section:"Delivery",
+  scenario:"Delivery is booked for Thursday. On Wednesday morning the customer rings to move it to the following week.",
+  q:"What applies?",
+  options:[
+    "The change is free, we simply rebook",
+    "Deliveries cannot be changed inside 48 hours without further cost, and a permitted change carries a minimum $50 administration fee",
+    "A $140 redelivery fee applies",
+    "One free change is allowed per order"
+  ],
+  answer:1,
+  why:"Deliveries cannot be changed within 48 hours or further costs apply, and any permitted change carries a minimum $50 administration fee. Wednesday for a Thursday delivery is inside that window. The truck is loaded and the run is planned, which is what the fee reflects.",
+  source:"Delivery Policy"
+},
+{
+  id:"E9", section:"Delivery",
+  scenario:"A customer will be at work and asks the driver to leave the lounge on the verandah.",
+  q:"What do you need them to understand?",
+  options:[
+    "Dankz still carries the risk until they get home",
+    "Where authority to leave is given, delivery is completed at the customer's risk and Dankz is not responsible for loss, theft or damage afterwards",
+    "The driver cannot leave goods unattended under any circumstances",
+    "The goods are insured for 24 hours after being left"
+  ],
+  answer:1,
+  why:"If authority to leave is given, the delivery is completed at the customer's risk, and Dankz accepts no responsibility for loss, theft or damage after that point. It is also worth remembering that the furniture arrives assembled with packaging removed as part of the service, so leaving it outside is rarely a good outcome for anybody.",
+  source:"Delivery Policy"
+},
+{
+  id:"E10", section:"Delivery",
+  scenario:"A customer has paid in full but their renovation has run over and they cannot take delivery for another six weeks.",
+  q:"What can you offer?",
+  options:[
+    "We hold fully paid furniture free for 21 days, after that storage is by arrangement and fees apply",
+    "We hold it free for as long as they need",
+    "We hold it free for 7 days only",
+    "Storage is not available, they must take delivery or cancel"
+  ],
+  answer:0,
+  why:"Fully paid furniture is held at no charge for up to 21 days once the order is ready for delivery. Beyond that, storage is by arrangement only, and stores are deliberately not given a rate card. Do not quote a figure, not even a rough one, because the fee depends on space, duration and handling and is set centrally. Refer it up, and tell the customer we will come back to them with a price before anything is agreed. Dankz can also require delivery or collection if storage runs on unreasonably, and if it cannot be completed the order may be treated as cancelled with fees deducted from the deposit.",
+  source:"Storage and Holding"
+},
+{
+  id:"E11", section:"Delivery",
+  scenario:"A customer buying a tall entertainment unit asks whether the delivery team will anchor it to the wall for her.",
+  q:"What do you tell her?",
+  options:[
+    "Yes, wall fixing is part of the installation service",
+    "No, the delivery team does not fix anything to walls",
+    "Yes, if she supplies the brackets",
+    "Only if the wall is brick"
+  ],
+  answer:1,
+  why:"Our delivery team does not fix anything to walls, and that includes entertainment units, mirrors and anti-tip anchors. The Comfort of Home service covers assembly, placement and packaging removal, and it stops there. Say it during the sale, not on delivery day. If she wants the unit anchored she will need her own handyman, and it is worth mentioning that tall furniture in a home with small children is usually worth anchoring.",
+  source:"Delivery Policy"
+},
+
+/* ---- F. Pricing and the law ---- */
+{
+  id:"F1", section:"Pricing and the law",
+  scenario:"A ticket on the floor reads $1,299 on a sofa that should be $2,299.",
+  q:"What is the position?",
+  options:[
+    "We have to honour the ticketed price",
+    "Dankz may correct pricing errors, and if it is picked up before delivery the customer chooses to proceed at the correct price or cancel",
+    "Honour it now and charge the difference on delivery",
+    "Remove the ticket and say nothing"
+  ],
+  answer:1,
+  why:"Dankz reserves the right to correct pricing errors at any time and is not obliged to honour a price caused by a typographical, system or human error. Where the error is found before delivery the customer is told and can proceed at the correct price or cancel. Handle it politely and get a manager involved. Pricing disputes are exactly the kind of thing the ACCC pays attention to, so do not argue it out on the shop floor.",
+  source:"Pricing and Promotions"
+},
+{
+  id:"F2", section:"Pricing and the law",
+  scenario:"A seam has come apart on a three month old sofa. It is a minor problem and the item is otherwise fine.",
+  q:"Who decides whether it is repaired, replaced or refunded?",
+  options:[
+    "The customer chooses whichever they prefer",
+    "Dankz chooses the remedy, and repair is generally the first course of action",
+    "It must be refunded on request",
+    "It must be replaced with a new item"
+  ],
+  answer:1,
+  why:"For minor problems Dankz chooses the remedy that best suits the situation, and where a repair is reasonable that is generally what happens first. The customer only gets to choose the remedy when the failure is a major one. Knowing which side of that line a problem falls on is the whole game.",
+  source:"Australian Consumer Law and Warranty Policy"
+},
+{
+  id:"F3", section:"Pricing and the law",
+  q:"Where there is a major failure, what is the customer entitled to?",
+  options:[
+    "A repair, at Dankz's discretion",
+    "A replacement or refund, plus compensation for any other reasonably foreseeable loss",
+    "A store credit to the value of the item",
+    "A repair first, and a replacement only if the repair fails"
+  ],
+  answer:1,
+  why:"Under the Australian Consumer Law a major failure entitles the customer to a replacement or a refund, and to compensation for any other reasonably foreseeable loss or damage. The choice is theirs, not ours. Our own warranty sits on top of these rights and cannot cut them down.",
+  source:"Australian Consumer Law"
+},
+{
+  id:"F4", section:"Pricing and the law",
+  scenario:"A customer bought a clearance floor stock sofa five weeks ago and the frame has collapsed.",
+  q:"What applies?",
+  options:[
+    "Nothing, clearance stock is sold as is",
+    "Clearance items are excluded from change of mind returns, but consumer guarantees still apply and this is assessed as a fault",
+    "The warranty is void on discounted items",
+    "A repair is available at the customer's cost"
+  ],
+  answer:1,
+  why:"Clearance and floor stock are excluded from restocking, which is about change of mind. That has nothing to do with faults. Consumer guarantees cannot be excluded, so a collapsed frame on a five week old sofa is assessed under the warranty and the Australian Consumer Law like any other item. A discount does not buy away someone's rights.",
+  source:"Restocking Policy and Australian Consumer Law"
+},
+{
+  id:"F5", section:"Pricing and the law",
+  q:"A refund is required under the Australian Consumer Law. Does the 20 percent restocking fee still come off?",
+  options:[
+    "Yes, the fee always applies to a return",
+    "No, restocking and layby termination fees do not apply where the law requires a refund",
+    "Yes, but at half the usual rate",
+    "Only if a manager approves the waiver"
+  ],
+  answer:1,
+  why:"Restocking fees do not apply where a refund is required under the Australian Consumer Law, and neither do layby termination fees. Those charges exist for change of mind, not for faults. Charging a restocking fee on a genuine ACL refund is the kind of mistake that turns a service issue into a regulator issue.",
+  source:"Restocking Policy and Layby Policy"
+},
+{
+  id:"F6", section:"Pricing and the law",
+  scenario:"A customer wants to use a 10 percent loyalty offer on top of an advertised sale price, and asks whether the sale price includes delivery.",
+  q:"What is the position?",
+  options:[
+    "Offers can be stacked, and promotional pricing always includes delivery",
+    "Promotions cannot be combined unless we have said so, and promotional pricing may exclude delivery, services or particular ranges",
+    "Offers can be stacked but delivery is charged separately",
+    "It is at the salesperson's discretion"
+  ],
+  answer:1,
+  why:"Every promotion carries its own terms. Promotions cannot be combined unless the offer says otherwise, promotional pricing may exclude delivery, services or specific product ranges, and offers run for a limited time and can be withdrawn without notice. Read the terms of the offer in front of you rather than working from what the last promotion allowed.",
+  source:"Pricing and Promotions"
+},
+{
+  id:"F7", section:"Pricing and the law",
+  scenario:"A customer has a competitor's advertisement on their phone showing a similar lounge for less, and asks whether we will match it.",
+  q:"What is the answer?",
+  options:[
+    "Yes, we match any advertised price on a comparable product",
+    "No, Dankz does not offer a price match",
+    "Yes, up to 10 percent below our ticketed price",
+    "It is at the salesperson's discretion"
+  ],
+  answer:1,
+  why:"Dankz does not have a price match. There is no policy to point to and no discretion to exercise, so do not invent one and do not send the customer to a manager expecting a different answer. What you can do is sell on the things the comparison leaves out: what the frame is made of, how long it is covered for, that it arrives assembled and installed with the packaging taken away, and that there is a showroom they can walk back into.",
+  source:"Pricing and Promotions"
+}
+
+];
+
+/* ===================================================================== */
+
+var state = {
+  name:"", store:"", idx:0, answers:[], startedAt:0, locked:false, subset:null, perm:[]
+};
+
+function shuffle(arr){
+  for(var i = arr.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+  }
+  return arr;
+}
+
+var el = function(id){ return document.getElementById(id); };
+
+function order(){ return state.subset || QUESTIONS.map(function(_,i){return i;}); }
+function currentQ(){ return QUESTIONS[ order()[state.idx] ]; }
+
+/* ---------- start ---------- */
+el("startForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  state.name = el("name").value.trim();
+  state.store = el("store").value;
+  if(!state.name || !state.store) return;
+  try{ localStorage.setItem("dankzQuizWho", JSON.stringify({n:state.name,s:state.store})); }catch(err){}
+  beginAttempt(null);
+});
+
+try{
+  var who = JSON.parse(localStorage.getItem("dankzQuizWho") || "null");
+  if(who && who.n){ el("name").value = who.n; el("store").value = who.s || ""; }
+}catch(err){}
+
+function beginAttempt(subset){
+  state.subset = subset;
+  state.idx = 0;
+  state.answers = [];
+  state.startedAt = Date.now();
+  el("screenStart").hidden = true;
+  el("screenResult").hidden = true;
+  el("screenQ").hidden = false;
+  el("rail").hidden = false;
+  window.scrollTo(0,0);
+  render();
+}
+
+/* ---------- render a question ---------- */
+function render(){
+  var q = currentQ();
+  var total = order().length;
+
+  el("railSection").textContent = q.section;
+  el("railCount").textContent = (state.idx+1) + " / " + total;
+  el("railBar").style.width = ((state.idx + 1) / total * 100) + "%";
+
+  el("qText").textContent = q.q;
+  var sc = el("qScenario");
+  if(q.scenario){ sc.textContent = q.scenario; sc.hidden = false; }
+  else { sc.hidden = true; }
+
+  /* shuffle the options so nobody can learn the shape of the answers */
+  state.perm = shuffle(q.options.map(function(_,i){ return i; }));
+
+  var box = el("qOptions");
+  box.textContent = "";
+  var keys = ["A","B","C","D","E"];
+  state.perm.forEach(function(orig, pos){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "opt";
+    var k = document.createElement("span");
+    k.className = "opt-key";
+    k.textContent = keys[pos];
+    var t = document.createElement("span");
+    t.className = "opt-text";
+    t.textContent = q.options[orig];
+    b.appendChild(k); b.appendChild(t);
+    b.addEventListener("click", function(){ choose(pos); });
+    box.appendChild(b);
+  });
+
+  el("qFeedback").textContent = "";
+  el("qNav").hidden = true;
+  state.locked = false;
+}
+
+/* ---------- answer ---------- */
+function choose(pos){
+  if(state.locked) return;
+  state.locked = true;
+  var q = currentQ();
+  var picked = state.perm[pos];
+  var right = (picked === q.answer);
+  state.answers.push({ id:q.id, chosen:picked, correct:right });
+
+  var btns = el("qOptions").querySelectorAll(".opt");
+  for(var n=0; n<btns.length; n++){
+    btns[n].disabled = true;
+    if(state.perm[n] === q.answer) btns[n].classList.add("is-right");
+    else if(n === pos) btns[n].classList.add("is-wrong");
+    else btns[n].classList.add("is-dim");
+  }
+
+  var fb = document.createElement("div");
+  fb.className = "feedback " + (right ? "right" : "wrong");
+  var v = document.createElement("div");
+  v.className = "verdict";
+  v.textContent = right ? "Correct" : "Not quite";
+  var w = document.createElement("p");
+  w.className = "why";
+  w.textContent = q.why;
+  var s = document.createElement("div");
+  s.className = "source";
+  s.textContent = q.source;
+  fb.appendChild(v); fb.appendChild(w); fb.appendChild(s);
+  el("qFeedback").appendChild(fb);
+
+  var last = (state.idx === order().length - 1);
+  el("btnNext").textContent = last ? "See your result" : "Next question";
+  el("qNav").hidden = false;
+  el("btnNext").focus({preventScroll:true});
+}
+
+el("btnNext").addEventListener("click", function(){
+  if(state.idx < order().length - 1){
+    state.idx++;
+    window.scrollTo({top:0, behavior:"auto"});
+    render();
+  } else {
+    finish();
+  }
+});
+
+/* ---------- results ---------- */
+function finish(){
+  var total = order().length;
+  var score = state.answers.filter(function(a){return a.correct;}).length;
+  var passed = (score === total) && (total === QUESTIONS.length);
+  var secs = Math.round((Date.now() - state.startedAt)/1000);
+  var wrong = state.answers.filter(function(a){return !a.correct;});
+
+  el("screenQ").hidden = true;
+  el("rail").hidden = true;
+  var out = el("screenResult");
+  out.hidden = false;
+  out.textContent = "";
+  window.scrollTo(0,0);
+
+  var board = document.createElement("div");
+  board.className = "scoreboard " + (passed ? "pass" : "fail");
+
+  var stamp = document.createElement("span");
+  stamp.className = "stamp";
+  stamp.textContent = passed ? "Passed" : (total === QUESTIONS.length ? "Not yet" : "Practice round");
+  board.appendChild(stamp);
+
+  var big = document.createElement("div");
+  big.className = "big";
+  big.textContent = score + " / " + total;
+  board.appendChild(big);
+
+  var line = document.createElement("p");
+  line.style.color = "var(--ink-2)";
+  if(passed){
+    line.textContent = state.name + ", that is every question right. Your result has been recorded and there is nothing else you need to do.";
+  } else if(total !== QUESTIONS.length){
+    line.textContent = "That was a practice round on the questions you missed, so it is not recorded. Sit the full quiz again when you are ready.";
+  } else {
+    line.textContent = "You need all " + total + " right to pass. Everything you missed is below, with the reason. Read through it and go again.";
+  }
+  board.appendChild(line);
+  out.appendChild(board);
+
+  if(wrong.length){
+    var h = document.createElement("h2");
+    h.className = "sec";
+    h.textContent = wrong.length === 1 ? "The one you missed" : "The " + wrong.length + " you missed";
+    out.appendChild(h);
+
+    var list = document.createElement("div");
+    list.className = "missed";
+    wrong.forEach(function(a){
+      var q = QUESTIONS.filter(function(x){return x.id === a.id;})[0];
+      var row = document.createElement("div");
+      row.className = "miss";
+      var sec = document.createElement("div");
+      sec.className = "miss-sec"; sec.textContent = q.section;
+      var qq = document.createElement("div");
+      qq.className = "miss-q"; qq.textContent = q.q;
+      var ans = document.createElement("div");
+      ans.className = "miss-a";
+      ans.appendChild(document.createTextNode("Correct answer: "));
+      var bb = document.createElement("b");
+      bb.textContent = q.options[q.answer];
+      ans.appendChild(bb);
+      var why = document.createElement("div");
+      why.className = "miss-why"; why.textContent = q.why;
+      row.appendChild(sec); row.appendChild(qq); row.appendChild(ans); row.appendChild(why);
+      list.appendChild(row);
+    });
+    out.appendChild(list);
+  }
+
+  var nav = document.createElement("div");
+  nav.className = "btn-row";
+  if(!passed){
+    var again = document.createElement("button");
+    again.className = "btn"; again.type = "button";
+    again.textContent = "Sit the full quiz again";
+    again.addEventListener("click", function(){ beginAttempt(null); });
+    nav.appendChild(again);
+
+    if(wrong.length && total === QUESTIONS.length){
+      var drill = document.createElement("button");
+      drill.className = "btn btn-quiet"; drill.type = "button";
+      drill.textContent = "Practise just the " + wrong.length + " I missed";
+      drill.addEventListener("click", function(){
+        var ids = wrong.map(function(a){return a.id;});
+        var sub = [];
+        QUESTIONS.forEach(function(q,i){ if(ids.indexOf(q.id) > -1) sub.push(i); });
+        beginAttempt(sub);
+      });
+      nav.appendChild(drill);
+    }
+  } else {
+    var done = document.createElement("button");
+    done.className = "btn btn-quiet"; done.type = "button";
+    done.textContent = "Sit it again";
+    done.addEventListener("click", function(){ beginAttempt(null); });
+    nav.appendChild(done);
+  }
+  out.appendChild(nav);
+
+  var sync = document.createElement("div");
+  sync.className = "sync";
+  sync.id = "syncLine";
+  out.appendChild(sync);
+
+  if(total === QUESTIONS.length){
+    submit({
+      name: state.name,
+      store: state.store,
+      score: score,
+      total: total,
+      secs: secs,
+      passed: passed ? 1 : 0,
+      answers: state.answers.map(function(a){return a.chosen;}).join(""),
+      wrong: wrong.map(function(a){return a.id;}).join(",")
+    });
+  } else {
+    setSync("Practice rounds are not recorded.", "");
+  }
+}
+
+function setSync(text, cls){
+  var s = el("syncLine");
+  if(!s) return;
+  s.textContent = "";
+  var d = document.createElement("span");
+  d.className = "dot " + cls;
+  var t = document.createElement("span");
+  t.textContent = text;
+  s.appendChild(d); s.appendChild(t);
+}
+
+/* ---------- send the result (JSONP, no CORS headaches) ---------- */
+var jsonpN = 0;
+function submit(data){
+  if(!CONFIG.ENDPOINT){
+    setSync("Results recording is not switched on yet, so this attempt was not saved.", "warn");
+    queue(data);
+    return;
+  }
+  setSync("Saving your result...", "");
+  send(data, function(ok){
+    if(ok){ setSync("Result saved.", "ok"); flush(); }
+    else { queue(data); setSync("Could not reach the results sheet. Saved on this device and it will send next time.", "warn"); }
+  });
+}
+
+function send(data, cb){
+  var name = "dankzCb" + (++jsonpN);
+  var done = false;
+  var timer = setTimeout(function(){ if(!done){ done = true; cleanup(); cb(false); } }, 12000);
+  window[name] = function(){ if(!done){ done = true; clearTimeout(timer); cleanup(); cb(true); } };
+  function cleanup(){
+    try{ delete window[name]; }catch(e){ window[name] = undefined; }
+    if(sc && sc.parentNode) sc.parentNode.removeChild(sc);
+  }
+  var params = [];
+  params.push("action=submit");
+  params.push("key=" + encodeURIComponent(CONFIG.SHARED_KEY));
+  for(var k in data){ if(data.hasOwnProperty(k)) params.push(k + "=" + encodeURIComponent(data[k])); }
+  params.push("ts=" + Date.now());
+  params.push("callback=" + name);
+  var sc = document.createElement("script");
+  sc.src = CONFIG.ENDPOINT + (CONFIG.ENDPOINT.indexOf("?") > -1 ? "&" : "?") + params.join("&");
+  sc.onerror = function(){ if(!done){ done = true; clearTimeout(timer); cleanup(); cb(false); } };
+  document.body.appendChild(sc);
+}
+
+function queue(data){
+  try{
+    var q = JSON.parse(localStorage.getItem("dankzQuizQueue") || "[]");
+    q.push(data);
+    localStorage.setItem("dankzQuizQueue", JSON.stringify(q.slice(-25)));
+  }catch(e){}
+}
+
+function flush(){
+  if(!CONFIG.ENDPOINT) return;
+  var q = [];
+  try{ q = JSON.parse(localStorage.getItem("dankzQuizQueue") || "[]"); }catch(e){ return; }
+  if(!q.length) return;
+  try{ localStorage.setItem("dankzQuizQueue", "[]"); }catch(e){}
+  q.forEach(function(item){
+    send(item, function(ok){ if(!ok) queue(item); });
+  });
+}
+flush();
+</script>

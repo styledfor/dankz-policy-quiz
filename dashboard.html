@@ -1,0 +1,434 @@
+<title>Policy Check Results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#EBEEE8;--surface:#FFFFFF;--surface-2:#F5F7F2;
+  --ink:#151B18;--ink-2:#4C5650;--ink-3:#78827B;
+  --line:#D6DBD0;--line-2:#C2C9BA;
+  --accent:#8A5A16;--accent-soft:#F2E7D3;--on-solid:#FFFFFF;
+  --good:#2C6E49;--good-soft:#E2EEE6;--good-line:#A9CFB8;
+  --bad:#A63A28;--bad-soft:#F7E4DF;--bad-line:#E0B2A7;
+  --shadow:0 1px 2px rgba(21,27,24,.05), 0 8px 24px -12px rgba(21,27,24,.14);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#11150F;--surface:#1A201B;--surface-2:#212821;
+    --ink:#E8ECE4;--ink-2:#A9B2A6;--ink-3:#7E877C;
+    --line:#2E362E;--line-2:#3D473C;
+    --accent:#D9A65A;--accent-soft:#332815;--on-solid:#11150F;
+    --good:#79C79A;--good-soft:#1A2C21;--good-line:#2F5340;
+    --bad:#E39178;--bad-soft:#33201A;--bad-line:#5A3529;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#11150F;--surface:#1A201B;--surface-2:#212821;
+  --ink:#E8ECE4;--ink-2:#A9B2A6;--ink-3:#7E877C;
+  --line:#2E362E;--line-2:#3D473C;
+  --accent:#D9A65A;--accent-soft:#332815;--on-solid:#11150F;
+  --good:#79C79A;--good-soft:#1A2C21;--good-line:#2F5340;
+  --bad:#E39178;--bad-soft:#33201A;--bad-line:#5A3529;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2{font-family:Archivo,sans-serif;font-weight:700;margin:0;letter-spacing:-.01em;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.masthead{border-bottom:1px solid var(--line);background:var(--surface)}
+.masthead-inner{max-width:1000px;margin:0 auto;padding:14px 22px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.wordmark{font-family:Archivo,sans-serif;font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase}
+.masthead-sub{font-size:12.5px;color:var(--ink-3);letter-spacing:.04em}
+.refresh{margin-left:auto;font-size:13px;color:var(--ink-3);display:flex;gap:12px;align-items:center}
+.linkish{background:none;border:none;padding:0;color:var(--accent);cursor:pointer;font-weight:600;font-size:13px}
+.linkish:hover{text-decoration:underline}
+
+.wrap{max-width:1000px;margin:0 auto;padding:26px 22px 70px;display:flex;flex-direction:column;gap:30px}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.tile{background:var(--surface);padding:16px 18px;display:flex;flex-direction:column;gap:3px}
+.tile .k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.tile .v{font-family:Archivo,sans-serif;font-weight:700;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
+.tile .sub{font-size:12.5px;color:var(--ink-3)}
+.tile.hi .v{color:var(--good)}
+
+section h2{font-size:17px;margin-bottom:12px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:600;
+  background:var(--surface-2);position:sticky;top:0}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+th.num{text-align:right}
+.who{font-weight:600}
+.sub{font-size:12.5px;color:var(--ink-3)}
+
+.pill{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  padding:3px 9px;border-radius:99px;border:1px solid currentColor;white-space:nowrap}
+.pill.pass{color:var(--good);background:var(--good-soft)}
+.pill.open{color:var(--accent);background:var(--accent-soft)}
+.pill.none{color:var(--ink-3);background:var(--surface-2)}
+tr.idle td{color:var(--ink-3)}
+
+.weak{display:flex;flex-direction:column}
+.weak-row{display:grid;grid-template-columns:1fr auto;gap:4px 18px;align-items:baseline;
+  padding:13px 16px;border-bottom:1px solid var(--line)}
+.weak-row:last-child{border-bottom:none}
+.weak-q{font-weight:500}
+.weak-meta{grid-column:1;font-size:12.5px;color:var(--ink-3)}
+.weak-rate{grid-column:2;grid-row:1 / span 2;font-variant-numeric:tabular-nums;font-family:Archivo,sans-serif;
+  font-weight:700;font-size:19px;text-align:right;align-self:center}
+.weak-rate.hot{color:var(--bad)}
+.meter{grid-column:1 / -1;height:4px;background:var(--line);border-radius:2px;overflow:hidden;margin-top:5px}
+.meter span{display:block;height:100%;background:var(--bad)}
+
+.stores{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.store{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.store-name{font-weight:600}
+.store-bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.store-bar span{display:block;height:100%;background:var(--good)}
+.store-meta{font-size:12.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+
+.msg{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:28px;
+  display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow)}
+.msg h2{font-size:19px}
+.msg p{color:var(--ink-2);max-width:62ch}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+</style>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <span class="wordmark">Dankz</span>
+    <span class="masthead-sub">Policy check results</span>
+    <span class="refresh">
+      <span id="stamp">Loading...</span>
+      <button class="linkish" type="button" id="btnRefresh">Refresh</button>
+    </span>
+  </div>
+</div>
+
+<div class="wrap" id="root">
+  <div class="msg"><h2>Loading results</h2><p>Fetching from the results sheet.</p></div>
+</div>
+
+<script src="config.js"></script>
+<script>
+/* =====================================================================
+   Settings come from config.js, the same file the quiz reads.
+   ===================================================================== */
+var CONFIG = window.DANKZ_CONFIG || {};
+if(!CONFIG.ENDPOINT) CONFIG.ENDPOINT = "";
+if(!CONFIG.SHARED_KEY) CONFIG.SHARED_KEY = "dankz";
+if(!CONFIG.STORES || !CONFIG.STORES.length){
+  CONFIG.STORES = ["Osborne Park","Willetton","Joondalup","Port Kennedy",
+                   "Mandurah","Midland","Online","Head Office"];
+}
+if(!CONFIG.STAFF) CONFIG.STAFF = [];
+
+/* Question labels, used to name the weak spots. If you reword a question
+   in index.html, update the matching line here so the report reads right.
+   The ids are what matter and they must stay in step. */
+var LABELS = {
+  A1:["Warranty periods","When the warranty period starts"],
+  A2:["Warranty periods","15 year frame on Signature range"],
+  A3:["Warranty periods","2 year frame outside Signature"],
+  A4:["Warranty periods","5 year foam cover on Signature"],
+  A5:["Warranty periods","Original purchaser only"],
+  B1:["What is not covered","Comfort settlement and softening"],
+  B2:["What is not covered","Fabric pilling"],
+  B3:["What is not covered","125kg per seat weight limit"],
+  B4:["What is not covered","Natural leather characteristics"],
+  C1:["Making a claim","Claims by email to service@dankz.com.au"],
+  C2:["Making a claim","5 to 7 working day response"],
+  C3:["Making a claim","Transport costs after 12 months"],
+  D1:["Returns and layby","Change of mind is discretionary"],
+  D2:["Returns and layby","7 day restocking window"],
+  D3:["Returns and layby","Custom orders cannot be cancelled"],
+  D4:["Returns and layby","20 percent layby termination fee"],
+  D5:["Returns and layby","Changing an order after processing starts"],
+  D6:["Returns and layby","Approved return is store credit, less 20 percent"],
+  E1:["Delivery","What the $140 charge covers"],
+  E2:["Delivery","$20 per additional bulky item"],
+  E3:["Delivery","$40 stair surcharge, two flights"],
+  E4:["Delivery","Spiral stairs, ground floor only"],
+  E5:["Delivery","Damage reported within 24 hours"],
+  E6:["Delivery","$140 redelivery fee"],
+  E7:["Delivery","$4 per km beyond the standard zone"],
+  E8:["Delivery","48 hour change window, $50 admin fee"],
+  E9:["Delivery","Authority to leave is at customer risk"],
+  E10:["Delivery","21 days free storage, then fees"],
+  E11:["Delivery","We do not fix anything to walls"],
+  F1:["Pricing and the law","Correcting a pricing error"],
+  F2:["Pricing and the law","Minor failure, Dankz picks the remedy"],
+  F3:["Pricing and the law","Major failure entitlements"],
+  F4:["Pricing and the law","Clearance stock still has guarantees"],
+  F5:["Pricing and the law","No restocking fee on an ACL refund"],
+  F6:["Pricing and the law","Promotions cannot be combined"],
+  F7:["Pricing and the law","There is no price match"]
+};
+
+var STORES = CONFIG.STORES;
+var norm = function(s){ return String(s||"").trim().toLowerCase().replace(/\s+/g," "); };
+
+var el = function(id){ return document.getElementById(id); };
+var root = el("root");
+
+function h(tag, cls, text){
+  var n = document.createElement(tag);
+  if(cls) n.className = cls;
+  if(text !== undefined && text !== null) n.textContent = text;
+  return n;
+}
+function msg(title, body, extra){
+  root.textContent = "";
+  var m = h("div","msg");
+  m.appendChild(h("h2",null,title));
+  m.appendChild(h("p",null,body));
+  if(extra) m.appendChild(extra);
+  root.appendChild(m);
+}
+
+/* ---------- fetch (JSONP) ---------- */
+var cbN = 0;
+function load(){
+  if(!CONFIG.ENDPOINT){
+    el("stamp").textContent = "Not connected";
+    var p = h("p",null,"Open dashboard.html and paste your Google Apps Script web app URL into the ENDPOINT line near the top of the script, then reload this page.");
+    msg("No results source set yet","This dashboard reads from the same Google Sheet the quiz writes to.", p);
+    return;
+  }
+  el("stamp").textContent = "Loading...";
+  var name = "dashCb" + (++cbN);
+  var done = false;
+  var sc;
+  var timer = setTimeout(function(){ if(!done){ done = true; clean(); fail("The results sheet did not respond."); } }, 15000);
+  function clean(){
+    clearTimeout(timer);
+    try{ delete window[name]; }catch(e){ window[name] = undefined; }
+    if(sc && sc.parentNode) sc.parentNode.removeChild(sc);
+  }
+  window[name] = function(res){
+    if(done) return; done = true; clean();
+    if(!res || res.ok === false){ fail((res && res.error) || "The sheet refused the request."); return; }
+    draw(res.rows || []);
+  };
+  sc = document.createElement("script");
+  sc.src = CONFIG.ENDPOINT + (CONFIG.ENDPOINT.indexOf("?") > -1 ? "&" : "?")
+    + "action=results&key=" + encodeURIComponent(CONFIG.SHARED_KEY)
+    + "&ts=" + Date.now() + "&callback=" + name;
+  sc.onerror = function(){ if(!done){ done = true; clean(); fail("Could not reach the results sheet."); } };
+  document.body.appendChild(sc);
+}
+function fail(why){
+  el("stamp").textContent = "Not loaded";
+  msg("Could not load results", why + " Check that the web app URL is correct and that the script is deployed with access set to anyone.");
+}
+el("btnRefresh").addEventListener("click", load);
+
+/* ---------- render ---------- */
+function draw(rows){
+  el("stamp").textContent = "Updated " + new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
+  root.textContent = "";
+
+  var roster = CONFIG.STAFF || [];
+
+  if(!rows.length && !roster.length){
+    msg("No attempts yet","Once someone completes the quiz their result will appear here within seconds of them finishing.");
+    return;
+  }
+
+  /* group by person */
+  var people = {};
+  rows.forEach(function(r){
+    var key = norm(r.name) + "|" + norm(r.store);
+    if(!people[key]) people[key] = {name:(r.name||"").trim(), store:r.store||"", attempts:[], passed:false};
+    people[key].attempts.push(r);
+    if(Number(r.score) === Number(r.total)) people[key].passed = true;
+  });
+
+  var list = Object.keys(people).map(function(k){
+    var p = people[k];
+    p.attempts.sort(function(a,b){ return new Date(a.ts) - new Date(b.ts); });
+    p.first = Number(p.attempts[0].score);
+    p.total = Number(p.attempts[0].total) || 36;
+    p.best = Math.max.apply(null, p.attempts.map(function(a){ return Number(a.score); }));
+    p.last = p.attempts[p.attempts.length-1].ts;
+    p.started = true;
+    return p;
+  });
+
+  /* anyone on the roster who has not sat it at all */
+  var notStarted = 0;
+  roster.forEach(function(s){
+    var seen = false;
+    list.forEach(function(p){
+      if(norm(p.name) === norm(s.name) && (!s.store || norm(p.store) === norm(s.store))){
+        seen = true;
+        p.name = s.name;              /* use the roster spelling, not whatever they typed */
+        if(s.store) p.store = s.store;
+      }
+    });
+    if(!seen){
+      notStarted++;
+      list.push({ name:s.name, store:s.store || "", attempts:[], passed:false, started:false });
+    }
+  });
+
+  list.sort(function(a,b){
+    if(a.started !== b.started) return a.started ? 1 : -1;
+    if(a.passed !== b.passed) return a.passed ? 1 : -1;
+    return (a.best || 0) - (b.best || 0);
+  });
+
+  var sat = list.filter(function(p){ return p.started; });
+  var passedCount = sat.filter(function(p){return p.passed;}).length;
+  var avgFirst = sat.length
+    ? sat.reduce(function(s,p){ return s + (p.first / p.total); }, 0) / sat.length
+    : 0;
+
+  /* tiles */
+  var tiles = h("div","tiles");
+  function tile(k,v,sub,hi){
+    var t = h("div","tile" + (hi ? " hi" : ""));
+    t.appendChild(h("div","k",k));
+    t.appendChild(h("div","v",v));
+    if(sub) t.appendChild(h("div","sub",sub));
+    tiles.appendChild(t);
+  }
+  tile("Passed", passedCount + " / " + list.length, "at 100 percent", passedCount === list.length && list.length > 0);
+  if(roster.length){
+    tile("Not started", String(notStarted), notStarted === 1 ? "person on the roster" : "people on the roster");
+  } else {
+    tile("Still open", String(list.length - passedCount), "have not passed yet");
+  }
+  tile("Attempts", String(rows.length), "sittings recorded");
+  tile("Average first go", Math.round(avgFirst*100) + "%", "before any retake");
+  root.appendChild(tiles);
+
+  /* people table */
+  var s1 = h("section");
+  s1.appendChild(h("h2",null,"Who has sat it"));
+  var panel = h("div","panel"); var scroll = h("div","scroll");
+  var tb = document.createElement("table");
+  var thead = document.createElement("thead");
+  var hr = document.createElement("tr");
+  ["Name","Store","Status","First go","Best","Attempts","Last sat"].forEach(function(t,i){
+    var th = h("th", (i>=3 && i<=5) ? "num" : null, t);
+    hr.appendChild(th);
+  });
+  thead.appendChild(hr); tb.appendChild(thead);
+  var tbody = document.createElement("tbody");
+  list.forEach(function(p){
+    var tr = document.createElement("tr");
+    var td1 = h("td"); td1.appendChild(h("div","who",p.name)); tr.appendChild(td1);
+    tr.appendChild(h("td",null,p.store));
+    var td3 = h("td");
+    if(!p.started){
+      td3.appendChild(h("span","pill none","Not started"));
+      tr.appendChild(td3);
+      tr.appendChild(h("td","num","—"));
+      tr.appendChild(h("td","num","—"));
+      tr.appendChild(h("td","num","0"));
+      tr.appendChild(h("td","num","—"));
+    } else {
+      td3.appendChild(h("span","pill " + (p.passed ? "pass" : "open"), p.passed ? "Passed" : "Open"));
+      tr.appendChild(td3);
+      tr.appendChild(h("td","num", p.first + "/" + p.total));
+      tr.appendChild(h("td","num", p.best + "/" + p.total));
+      tr.appendChild(h("td","num", String(p.attempts.length)));
+      tr.appendChild(h("td","num", fmtDate(p.last)));
+    }
+    tbody.appendChild(tr);
+  });
+  tb.appendChild(tbody);
+  scroll.appendChild(tb); panel.appendChild(scroll); s1.appendChild(panel);
+  root.appendChild(s1);
+
+  /* by store */
+  var s2 = h("section");
+  s2.appendChild(h("h2",null,"By store"));
+  var grid = h("div","stores");
+  var any = false;
+  STORES.forEach(function(name){
+    var mine = list.filter(function(p){ return norm(p.store) === norm(name); });
+    if(!mine.length) return;
+    any = true;
+    var pass = mine.filter(function(p){return p.passed;}).length;
+    var mineSat = mine.filter(function(p){ return p.started; });
+    var card = h("div","store");
+    card.appendChild(h("div","store-name",name));
+    var bar = h("div","store-bar");
+    var fill = h("span");
+    fill.style.width = Math.round(pass / mine.length * 100) + "%";
+    bar.appendChild(fill); card.appendChild(bar);
+    var meta = pass + " of " + mine.length + " passed";
+    if(mineSat.length){
+      var avg = mineSat.reduce(function(s,p){ return s + p.first/p.total; },0) / mineSat.length;
+      meta += "  ·  first go " + Math.round(avg*100) + "%";
+    }
+    if(mine.length - mineSat.length > 0){
+      meta += "  ·  " + (mine.length - mineSat.length) + " not started";
+    }
+    card.appendChild(h("div","store-meta", meta));
+    grid.appendChild(card);
+  });
+  if(any){ s2.appendChild(grid); root.appendChild(s2); }
+
+  /* weak spots */
+  var wrongCount = {};
+  rows.forEach(function(r){
+    String(r.wrong || "").split(",").forEach(function(id){
+      id = id.trim();
+      if(!id) return;
+      wrongCount[id] = (wrongCount[id] || 0) + 1;
+    });
+  });
+  var weak = Object.keys(wrongCount).map(function(id){
+    return { id:id, n:wrongCount[id], rate: wrongCount[id] / rows.length };
+  }).sort(function(a,b){ return b.n - a.n; }).slice(0,10);
+
+  var s3 = h("section");
+  s3.appendChild(h("h2",null,"Where people are going wrong"));
+  var wp = h("div","panel"); var wl = h("div","weak");
+  if(!weak.length){
+    wl.appendChild(h("div","weak-row","Nothing missed so far."));
+  } else {
+    weak.forEach(function(w){
+      var lab = LABELS[w.id] || ["",w.id];
+      var row = h("div","weak-row");
+      row.appendChild(h("div","weak-q", lab[1]));
+      var rate = h("div","weak-rate" + (w.rate >= .4 ? " hot" : ""), Math.round(w.rate*100) + "%");
+      row.appendChild(rate);
+      row.appendChild(h("div","weak-meta", lab[0] + "  ·  missed in " + w.n + " of " + rows.length + " attempts"));
+      var m = h("div","meter"); var f = h("span");
+      f.style.width = Math.round(w.rate*100) + "%";
+      m.appendChild(f); row.appendChild(m);
+      wl.appendChild(row);
+    });
+  }
+  wp.appendChild(wl); s3.appendChild(wp); root.appendChild(s3);
+}
+
+function fmtDate(v){
+  var d = new Date(v);
+  if(isNaN(d)) return String(v || "");
+  return d.toLocaleDateString([], {day:"2-digit", month:"short"});
+}
+
+load();
+</script>
